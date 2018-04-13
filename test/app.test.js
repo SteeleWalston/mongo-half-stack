@@ -57,17 +57,22 @@ describe('Pokemons API', () => {
 
     it('gets one pokemon', () => {
         return chai.request(app)
-            .get(`/pokemons/${bulb._id}`)
+            .get(`/pokemons/${char._id}`)
             .then(({ body }) => {
-                assert.deepEqual(body, bulb);
+                assert.deepEqual(body, char);
             });
     });
 
     it('updates a pokeman', () => {
+        char.type = 'FIRE';
         return chai.request(app)
             .put(`/pokemons/${char._id}`)
-            .then(({ body }) => {
-                assert.deepEqual(body, char);
+            .then(() => {
+                return chai.request(app)
+                    .get('/pokemons')
+                    .then(({ body }) => {
+                        assert.deepEqual(body, [bulb, char]);
+                    });
             });
     });
 
