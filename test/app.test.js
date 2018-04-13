@@ -55,6 +55,14 @@ describe('Pokemons API', () => {
             });
     });
 
+    it('gets one pokemon', () => {
+        return chai.request(app)
+            .get(`/pokemons/${bulb._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, bulb);
+            });
+    });
+
     after(() => mongo.client.close());
 
 });
