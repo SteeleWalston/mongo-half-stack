@@ -36,4 +36,6 @@ describe('Pokemons API', () => {
             });
     });
 
+    after(() => mongo.client.close());
+
 });
