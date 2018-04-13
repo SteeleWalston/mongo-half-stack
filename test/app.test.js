@@ -63,6 +63,14 @@ describe('Pokemons API', () => {
             });
     });
 
+    it('updates a pokeman', () => {
+        return chai.request(app)
+            .put(`/pokemons/${char._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, char);
+            });
+    });
+
     after(() => mongo.client.close());
 
 });
