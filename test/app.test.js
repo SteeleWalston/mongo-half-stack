@@ -76,6 +76,18 @@ describe('Pokemons API', () => {
             });
     });
 
+    it('removes a pokemon', () => {
+        return chai.request(app)
+            .del(`/pokemons/${char._id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/pokemons')
+                    .then(({ body }) => {
+                        assert.deepEqual(body, [bulb]);
+                    });
+            });
+    });
+
     after(() => mongo.client.close());
 
 });
