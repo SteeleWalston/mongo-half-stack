@@ -47,6 +47,14 @@ describe('Pokemons API', () => {
             });
     });
 
+    it('gets all pokemen', () => {
+        return chai.request(app)
+            .get('/pokemons')
+            .then(({ body }) => {
+                assert.deepEqual(body, [bulb, char]);
+            });
+    });
+
     after(() => mongo.client.close());
 
 });
