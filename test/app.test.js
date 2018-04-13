@@ -36,6 +36,17 @@ describe('Pokemons API', () => {
             });
     });
 
+    it('saves another pokemon', () => {
+        return chai.request(app)
+            .post('/pokemons')
+            .send(char)
+            .then(({ body }) => {
+                assert.ok(body._id);
+                assert.equal(body.name, char.name);
+                char = body;
+            });
+    });
+
     after(() => mongo.client.close());
 
 });
